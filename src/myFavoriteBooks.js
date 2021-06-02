@@ -28,7 +28,7 @@ class MyFavoriteBooks extends React.Component {
   }
 
   componentDidMount = async () => {
-    const books = await axios.get(`http://localhost:3001/books`, { params: { email: this.props.auth0.user.email } })
+    const books = await axios.get(`${process.env.REACT_APP_ROUTE}/books`, { params: { email: this.props.auth0.user.email } })
     console.log('books', books.data)
     this.setState({
       books: books.data,
@@ -91,7 +91,7 @@ class MyFavoriteBooks extends React.Component {
       email: this.props.auth0.user.email
     }
 
-    const newBooks = await axios.post('http://localhost:3001/addBooks', bookFormData)
+    const newBooks = await axios.post(`${process.env.REACT_APP_ROUTE}/addBooks`, bookFormData)
 
     this.setState({
       books:newBooks.data,
@@ -104,7 +104,7 @@ class MyFavoriteBooks extends React.Component {
      email:this.props.auth0.user.email
     }
 
-    let newBooks = await axios.delete(`http://localhost:3001/deleteBook/${index}`, {params:email})
+    let newBooks = await axios.delete(`${process.env.REACT_APP_ROUTE}/deleteBook/${index}`, {params:email})
 
     this.setState({
       books:newBooks.data
@@ -134,7 +134,7 @@ class MyFavoriteBooks extends React.Component {
       email: this.props.auth0.user.email
     }
 
-    let booksData = await axios.put(`http://localhost:3001/updateBook/${this.state.index}`, bookData)
+    let booksData = await axios.put(`${process.env.REACT_APP_ROUTE}/updateBook/${this.state.index}`, bookData)
 
     this.setState({
       showUpdateForm: false,
